@@ -1,20 +1,16 @@
 version: '3.8'
-
 services:
-	jupyter-datascience:
-	image: Carlos770-oss/jupyter-datascience-git:latest
-	environment:
-	 - JUPYTER_TOKEN=${MY_SECRET_KEY}
-	ports:
-	 - "8888:8888"
-	volumes:
-	 - ${MY_DIR}:/home/joyvan/work
+  jupyter:
+    image: autor0503/my-jupyter-image:latest
+    command: ["start-notebook.sh", "--NotebookApp.token=${JUPYTER_TOKEN}"]  # Usar valor de variable de entorno JUPYTER_TOKEN como contraseña
+    environment:
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN}  # Variable de entorno para la contraseña
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./:/home/jovyan/work  # Montar en el directorio actual
 
-	jupyter-spark:
-	image: jupyter/all-spark-notebook:latest
-	environment:
-	 - JUPYTER_TOKEN=${MY_SECRET_KEY}
-	ports:
-	 - "8889:8888"
-	volumes:
-	 - ${MY_DIR}:/home/joyvan/work
+  spark:
+    image: jupyter/pyspark-notebook:latest
+    ports:
+      - "8889:8888"
