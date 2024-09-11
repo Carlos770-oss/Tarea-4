@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+	jupyter-datascience:
+	image: Carlos770-oss/jupyter-datascience-git:latest
+	environment:
+	 - JUPYTER_TOKEN=${MY_SECRET_KEY}
+	ports:
+	 - "8888:8888"
+	volumes:
+	 - ${MY_DIR}:/home/joyvan/work
+
+	jupyter-spark:
+	image: jupyter/all-spark-notebook:latest
+	environment:
+	 - JUPYTER_TOKEN=${MY_SECRET_KEY}
+	ports:
+	 - "8889:8888"
+	volumes:
+	 - ${MY_DIR}:/home/joyvan/work
